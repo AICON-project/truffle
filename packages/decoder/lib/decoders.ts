@@ -1451,7 +1451,7 @@ export class ContractInstanceDecoder {
     //if pending, bypass the cache
     if (block === "pending") {
       const t = await this.web3.eth.getStorageAt(address, slot, block);
-      console.log(t);
+      console.log({address, slot, block, storage: t});
       return Conversion.toBytes(
         t,
         Codec.Evm.Utils.WORD_SIZE
@@ -1471,7 +1471,7 @@ export class ContractInstanceDecoder {
     }
     //otherwise, get it, cache it, and return it
     const tt = await this.web3.eth.getStorageAt(address, slot, block);
-    console.log(tt);
+    console.log({address, slot, block, storage: tt});
     let word = Conversion.toBytes(
       tt,
       Codec.Evm.Utils.WORD_SIZE
