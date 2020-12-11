@@ -1,5 +1,6 @@
 const debug = require("debug")("decoder:test:decoding-test");
 const assert = require("assert");
+const util = require("util");
 
 const Decoder = require("../../..");
 const { nativizeDecoderVariables } = require("../../../dist/utils");
@@ -48,7 +49,7 @@ contract("DecodingSample", _accounts => {
     const initialState = await decoder.state();
     const initialVariables = await decoder.variables();
 
-    console.log("initialVariables: %O", initialVariables);
+    console.log("initialVariables: %O", util.inspect(initialVariables));
 
     assert.equal(initialState.class.typeName, "DecodingSample");
 
