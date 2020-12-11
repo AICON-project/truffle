@@ -48,7 +48,7 @@ contract("DecodingSample", _accounts => {
     const initialState = await decoder.state();
     const initialVariables = await decoder.variables();
 
-    debug("initialVariables: %O", initialVariables);
+    console.log("initialVariables: %O", initialVariables);
 
     assert.equal(initialState.class.typeName, "DecodingSample");
 
