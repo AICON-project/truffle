@@ -1,3 +1,4 @@
+import util from "util";
 import debugModule from "debug";
 const debug = debugModule("decoder:utils");
 
@@ -20,9 +21,13 @@ export function nativizeDecoderVariables(
 ): { [name: string]: any } {
   return Object.assign(
     {},
-    ...variables.map(({ name, value }) => ({
-      [name]: Codec.Format.Utils.Inspect.nativize(value)
-    }))
+    ...variables.map((v) => {
+      console.log(util.inspect(v));
+      const { name, value } = v;
+      return {
+        [name]: Codec.Format.Utils.Inspect.nativize(value)
+      };
+    })
   );
   //note that the assignments are processed in order, so if multiple have same name, later
   //(i.e. more derived) will overwrite earlier (i.e. baser)... be aware!  I mean, this is the
