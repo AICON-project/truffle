@@ -1450,8 +1450,10 @@ export class ContractInstanceDecoder {
   ): Promise<Uint8Array> {
     //if pending, bypass the cache
     if (block === "pending") {
+      const t = await this.web3.eth.getStorageAt(address, slot, block);
+      console.log(t);
       return Conversion.toBytes(
-        await this.web3.eth.getStorageAt(address, slot, block),
+        t,
         Codec.Evm.Utils.WORD_SIZE
       );
     }
@@ -1468,8 +1470,10 @@ export class ContractInstanceDecoder {
       return this.storageCache[block][address][slot.toString()];
     }
     //otherwise, get it, cache it, and return it
+    const tt = await this.web3.eth.getStorageAt(address, slot, block);
+    console.log(tt);
     let word = Conversion.toBytes(
-      await this.web3.eth.getStorageAt(address, slot, block),
+      tt,
       Codec.Evm.Utils.WORD_SIZE
     );
     this.storageCache[block][address][slot.toString()] = word;
