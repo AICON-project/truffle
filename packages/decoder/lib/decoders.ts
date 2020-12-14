@@ -1,4 +1,5 @@
 import debugModule from "debug";
+const util = require("util");
 const debug = debugModule("decoder:decoders");
 
 import * as Abi from "@truffle/abi-utils";
@@ -1451,7 +1452,7 @@ export class ContractInstanceDecoder {
     //if pending, bypass the cache
     if (block === "pending") {
       const t = await this.web3.eth.getStorageAt(address, slot, block);
-      console.log({address, slot, block, storage: t});
+      console.log(util.inspect({method: "getStorageAt 1", address, slot, block, storage: t}));
       return Conversion.toBytes(
         t,
         Codec.Evm.Utils.WORD_SIZE
@@ -1471,7 +1472,7 @@ export class ContractInstanceDecoder {
     }
     //otherwise, get it, cache it, and return it
     const tt = await this.web3.eth.getStorageAt(address, slot, block);
-    console.log({address, slot, block, storage: tt});
+    console.log(util.inspect({method: "getStorageAt 2", address, slot, block, storage: tt}));
     let word = Conversion.toBytes(
       tt,
       Codec.Evm.Utils.WORD_SIZE

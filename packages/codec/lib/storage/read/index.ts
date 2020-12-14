@@ -79,6 +79,7 @@ export function* readStorage(
   for (let i = 0; i < totalWords; i++) {
     let offset = from.slot.offset.addn(i);
     const word = yield* readSlot(storage, { ...from.slot, offset });
+    debug("word: %o", word)
     if (typeof word !== "undefined") {
       data.set(word, i * Evm.Utils.WORD_SIZE);
     }

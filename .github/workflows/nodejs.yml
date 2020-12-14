@@ -27,8 +27,8 @@ jobs:
     strategy:
       matrix:
         platform: [ubuntu-latest]
-        node-version: [10.x, 12.x, 14.x]
-        env: [GETH=true, PACKAGES=true, INTEGRATION=true]
+        node-version: [14.x]
+        env: [PACKAGES=true]
     runs-on: ${{ matrix.platform }}
 
     steps:
@@ -42,6 +42,7 @@ jobs:
     - run: ${{ matrix.env }} yarn ci
       env:
         CI: true
+        DEBUG: "codec:storage:read"
     - uses: 8398a7/action-slack@v1.1.1
       with:
         type: failure
