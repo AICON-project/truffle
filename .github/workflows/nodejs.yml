@@ -42,7 +42,6 @@ jobs:
     - run: ${{ matrix.env }} yarn ci
       env:
         CI: true
-        DEBUG: "*"
     - uses: 8398a7/action-slack@v1.1.1
       with:
         type: failure
