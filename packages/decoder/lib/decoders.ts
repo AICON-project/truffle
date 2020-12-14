@@ -1470,9 +1470,16 @@ export class ContractInstanceDecoder {
     if (this.storageCache[block][address][slot.toString()] !== undefined) {
       return this.storageCache[block][address][slot.toString()];
     }
+
+    const ganacheVersion = await (this.web3.eth as any).getNodeInfo();
+    console.log({ganacheVersion});
+
     //otherwise, get it, cache it, and return it
     const tt = await this.web3.eth.getStorageAt(address, slot, block);
     console.log(util.inspect({method: "getStorageAt 2", address, slot, block, storage: tt}));
+    if (tt.indexOf("74776f")) {
+      console.log(tt);
+    }
     let word = Conversion.toBytes(
       tt,
       Codec.Evm.Utils.WORD_SIZE
